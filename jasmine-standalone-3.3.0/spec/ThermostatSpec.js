@@ -41,6 +41,12 @@ describe('Thermostat', function(){
   expect(thermostat.isPowerSavingModeOn()).toBe(false);
   thermostat.switchPowerSavingModeOn();
   expect(thermostat.isPowerSavingModeOn()).toBe(true);
-});
+  });
 
+  it('when power saving mode is on', function() {
+    for (var i = 0; i < 6; i++) {
+      thermostat.up();
+    }
+    expect(thermostat.getCurrentTemperature()).toEqual(25);
+  });
 });

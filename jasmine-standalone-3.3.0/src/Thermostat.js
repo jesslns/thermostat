@@ -1,10 +1,10 @@
 'use strict';
 
 function Thermostat () {
-  this.temp = 20;
+  this._temp = 20;
 };
 
 
-// Airport.prototype.planes = function() {
-//   return this._hangar;
-// };
+Thermostat.prototype.getCurrentTemp = function() {
+  return this._temp;
+};

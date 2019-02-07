@@ -28,19 +28,19 @@ describe('Thermostat', function(){
   });
 
   it('has a power saving mode on', function(){
-     expect(thermostat.isPowerSavingModeOn()).toBe(true);
+    expect(thermostat.isPowerSavingModeOn()).toBe(true);
   });
 
   it('can switch PSM off', function() {
-  thermostat.switchPowerSavingModeOff();
-  expect(thermostat.isPowerSavingModeOn()).toBe(false);
+    thermostat.switchPowerSavingModeOff();
+    expect(thermostat.isPowerSavingModeOn()).toBe(false);
   });
 
   it('can switch PSM back on', function() {
-  thermostat.switchPowerSavingModeOff();
-  expect(thermostat.isPowerSavingModeOn()).toBe(false);
-  thermostat.switchPowerSavingModeOn();
-  expect(thermostat.isPowerSavingModeOn()).toBe(true);
+    thermostat.switchPowerSavingModeOff();
+    expect(thermostat.isPowerSavingModeOn()).toBe(false);
+    thermostat.switchPowerSavingModeOn();
+    expect(thermostat.isPowerSavingModeOn()).toBe(true);
   });
 
   it('when power saving mode is on', function() {
@@ -48,5 +48,24 @@ describe('Thermostat', function(){
       thermostat.up();
     }
     expect(thermostat.getCurrentTemperature()).toEqual(25);
+  });
+
+  // counter test:
+  describe('when power saving mode is off', function() {
+    it('has a maximum temperature of 32 degrees', function() {
+      thermostat.switchPowerSavingModeOff();
+      for (var i = 0; i < 13; i++) {
+        thermostat.up();
+      }
+      expect(thermostat.getCurrentTemperature()).toEqual(32);
+    });
+  });
+
+  it('can reset temperature to 20', function(){
+    for (var i = 0; i < 6; i++) {
+       thermostat.up();
+     }
+    thermostat.resetTemperature();
+    expect(thermostat.getCurrentTemperature()).toEqual(20);
   });
 });
